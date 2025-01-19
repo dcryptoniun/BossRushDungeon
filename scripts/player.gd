@@ -9,6 +9,10 @@ const ATTACK_DAMAGE = 25
 var health = 100
 
 func _ready():
+	# Set up collision layers (Layer 1 for player)
+	collision_layer = 1
+	collision_mask = 2 # Only collide with enemies (Layer 2)
+	
 	# Add to player group for enemy targeting
 	add_to_group("player")
 	# Connect animation finished signal
@@ -65,6 +69,10 @@ func attack():
 	var attack_area = Area2D.new()
 	var collision_shape = CollisionShape2D.new()
 	var shape = CircleShape2D.new()
+	
+	# Set up attack area collision
+	attack_area.collision_layer = 0 # No collision layer needed for area
+	attack_area.collision_mask = 2 # Only detect enemies (Layer 2)
 	
 	shape.radius = 50.0 # Attack range
 	collision_shape.shape = shape

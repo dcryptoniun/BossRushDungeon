@@ -5,9 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://1787bt770f5i" path="res://scenes/world.tscn" id="2_i1e1h"]
 
 [node name="GameOver" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_kq110")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 custom_minimum_size = Vector2(200, 300)
