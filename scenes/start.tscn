@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=3 uid="uid://dporv8u1umf2q"]
+
+[ext_resource type="Script" path="res://scenes/start.gd" id="1_fu752"]
+[ext_resource type="Theme" uid="uid://dmbgblijwfl5s" path="res://themenew.tres" id="1_rpj4p"]
+[ext_resource type="PackedScene" uid="uid://1787bt770f5i" path="res://scenes/world.tscn" id="2_pcnuc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lo5vu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l7125"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b6m1s"]
+
+[sub_resource type="Theme" id="Theme_py3vq"]
+Button/colors/font_color = Color(0.88, 0, 0, 1)
+Button/colors/font_focus_color = Color(0.88, 0, 0, 1)
+Button/font_sizes/font_size = 38
+Button/styles/disabled = SubResource("StyleBoxEmpty_lo5vu")
+Button/styles/focus = SubResource("StyleBoxEmpty_l7125")
+Button/styles/hover = SubResource("StyleBoxEmpty_b6m1s")
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_fu752")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+custom_minimum_size = Vector2(200, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+color = Color(0.0413812, 0.161144, 0.129822, 0.576471)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Start" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Start"
+
+[node name="Credit" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Credit"
+
+[node name="quit" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Quit
+"
+
+[node name="creditcontainer" type="Node2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/creditcontainer"]
+custom_minimum_size = Vector2(200, 300)
+offset_left = 227.0
+offset_top = 111.0
+offset_right = 781.0
+offset_bottom = 503.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.28, 1.12)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.0158397, 0.0900776, 0.0581399, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/creditcontainer"]
+offset_left = 347.0
+offset_top = 144.0
+offset_right = 818.0
+offset_bottom = 475.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+
+[node name="Close" type="Button" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = SubResource("Theme_py3vq")
+text = "x"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Sound"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+theme_override_font_sizes/font_size = 28
+text = "xxxxx: xxxxxxx"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Sound"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+theme_override_font_sizes/font_size = 28
+text = "xxxxx: xxxxxxx"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Sound"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+theme_override_font_sizes/font_size = 28
+text = "xxxxx: xxxxxxx"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="World" parent="." instance=ExtResource("2_pcnuc")]
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/Credit" to="." method="_on_credit_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/creditcontainer/VBoxContainer/Close" to="." method="_on_close_pressed"]

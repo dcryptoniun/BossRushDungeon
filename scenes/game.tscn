@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvf1tlovoewde"]
+[gd_scene load_steps=5 format=3 uid="uid://dvf1tlovoewde"]
 
 [ext_resource type="PackedScene" uid="uid://1787bt770f5i" path="res://scenes/world.tscn" id="1_52srn"]
 [ext_resource type="PackedScene" uid="uid://bx7vw0wkaia5d" path="res://scenes/player.tscn" id="1_d1gj1"]
+[ext_resource type="PackedScene" uid="uid://drtcjylpfowkc" path="res://scenes/goblin_boss.tscn" id="3_xx0hg"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q0vuf"]
+vertices = PackedVector2Array(540.367, 188.641, 512.922, 37.6484, 661.961, 33.2422, 688.492, 157.031, 1131.3, 38, 1280.08, 33.3203, 1284.91, 590.227, -134.078, 624.75, 700.211, 160.25, -138.922, 43.5078, -73.1406, 32.9766, 367.313, 23.1719, 421.039, 229.992, 768.031, 87.0469, 791.727, 47.8438)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(7, 9, 10, 11, 12), PackedInt32Array(13, 14, 4), PackedInt32Array(8, 13, 4), PackedInt32Array(8, 7, 12, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-74, 23, 375, 13, 428, 217, 529, 182, 501, 28, 670, 23, 697, 149, 760, 81, 786, 38, 1131, 28, 1290, 23, 1295, 600, -144, 635, -149, 35)])
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -14,3 +20,9 @@ position = Vector2(576, 36)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(5, 0)
+
+[node name="GoblinBoss" parent="." instance=ExtResource("3_xx0hg")]
+position = Vector2(103, 236)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_q0vuf")
