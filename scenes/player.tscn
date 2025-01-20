@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b67v0q1ursaoj" path="res://assets/player/Run.png" id="3_oj7o4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tpdo3"]
-height = 50.0
+height = 38.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_62ukf"]
 atlas = ExtResource("2_n7q07")
@@ -1449,6 +1449,7 @@ bg_color = Color(0.976471, 0, 0.176471, 1)
 bg_color = Color(7.21961e-06, 0.726404, 0.164448, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+visibility_layer = 3
 script = ExtResource("1_3jioa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

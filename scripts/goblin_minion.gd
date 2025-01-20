@@ -5,8 +5,8 @@ extends CharacterBody2D
 @onready var health_bar = $ProgressBar
 
 var player: CharacterBody2D = null
-const SPEED = 200
-const ATTACK_RANGE = 40.0
+const SPEED = 150
+const ATTACK_RANGE = 30.0
 const ATTACK_DAMAGE = 5
 var last_direction = Vector2.ZERO
 var is_attacking = false
@@ -14,9 +14,9 @@ var health = 75
 var can_attack = true
 
 func _ready():
-	# Set up collision layers (Layer 2 for enemies)
-	collision_layer = 2
-	collision_mask = 1 # Only collide with player (Layer 1)
+	# Set up collision layers
+	collision_layer = 4 # Enemy is on layer 4
+	collision_mask = 1 | 2 # Collide with world (1) and player (2) only, not other enemies
 	
 	# Get reference to the player node
 	player = get_tree().get_first_node_in_group("player")
@@ -99,7 +99,7 @@ func attack():
 	
 	# Set up attack area collision
 	attack_area.collision_layer = 0 # No collision layer needed for area
-	attack_area.collision_mask = 1 # Only detect player (Layer 1)
+	attack_area.collision_mask = 2 # Only detect player (layer 2)
 	
 	shape.radius = ATTACK_RANGE
 	collision_shape.shape = shape

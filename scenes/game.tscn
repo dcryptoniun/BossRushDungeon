@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://bx7vw0wkaia5d" path="res://scenes/player.tscn" id="1_d1gj1"]
 [ext_resource type="PackedScene" uid="uid://drtcjylpfowkc" path="res://scenes/goblin_boss.tscn" id="3_xx0hg"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_q0vuf"]
-vertices = PackedVector2Array(540.367, 188.641, 512.922, 37.6484, 661.961, 33.2422, 688.492, 157.031, 1131.3, 38, 1280.08, 33.3203, 1284.91, 590.227, -134.078, 624.75, 700.211, 160.25, -138.922, 43.5078, -73.1406, 32.9766, 367.313, 23.1719, 421.039, 229.992, 768.031, 87.0469, 791.727, 47.8438)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(7, 9, 10, 11, 12), PackedInt32Array(13, 14, 4), PackedInt32Array(8, 13, 4), PackedInt32Array(8, 7, 12, 0, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-74, 23, 375, 13, 428, 217, 529, 182, 501, 28, 670, 23, 697, 149, 760, 81, 786, 38, 1131, 28, 1290, 23, 1295, 600, -144, 635, -149, 35)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_v5v0y"]
+vertices = PackedVector2Array(630.602, 283.758, 755, 118, 1282.43, 3.25781, 1309.56, 635, 615.141, 354.594, -134.047, 635, 541.258, 358.406, 522.648, 282.727, -136.953, 18.1328, 436.063, 205.813, 501.297, 153.617, 488.93, 27.1406, 654.633, 13.6328, 684.461, 118, 560.133, 256.531, 755, 17.7266, 474.492, 193.258, 374.156, 24.8828, 388.391, 137.711)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 3, 5, 6), PackedInt32Array(7, 6, 5, 8, 9), PackedInt32Array(10, 11, 12, 13, 0, 14), PackedInt32Array(1, 15, 2), PackedInt32Array(13, 1, 0), PackedInt32Array(16, 10, 14, 7), PackedInt32Array(8, 17, 18), PackedInt32Array(9, 16, 7), PackedInt32Array(9, 8, 18)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-147, 8, -144, 645, 1320, 645, 1292, -7, 745, 8, 745, 108, 692, 108, 662, 3, 478, 18, 491, 151, 443, 222, 619, 290, 607, 345, 549, 348, 534, 287, 627, 222, 486, 179, 440, 194, 398, 134, 383, 15)])
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -25,4 +25,4 @@ position = Vector2(5, 0)
 position = Vector2(103, 236)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_q0vuf")
+navigation_polygon = SubResource("NavigationPolygon_v5v0y")

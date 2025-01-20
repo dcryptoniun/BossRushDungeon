@@ -6,12 +6,12 @@ var last_direction = Vector2.ZERO # Tracks the last direction the player moved
 var is_attacking = false # Flag to indicate if the player is attacking
 const SPEED = 600
 const ATTACK_DAMAGE = 25
-var health = 100
+var health = 150
 
 func _ready():
-	# Set up collision layers (Layer 1 for player)
-	collision_layer = 1
-	collision_mask = 2 # Only collide with enemies (Layer 2)
+	# Set up collision layers
+	collision_layer = 2 # Player is on layer 2
+	collision_mask = 1 | 4 # Collide with world (1) and enemies (4)
 	
 	# Add to player group for enemy targeting
 	add_to_group("player")
@@ -72,7 +72,7 @@ func attack():
 	
 	# Set up attack area collision
 	attack_area.collision_layer = 0 # No collision layer needed for area
-	attack_area.collision_mask = 2 # Only detect enemies (Layer 2)
+	attack_area.collision_mask = 4 # Only detect enemies (layer 4)
 	
 	shape.radius = 50.0 # Attack range
 	collision_shape.shape = shape
@@ -101,7 +101,7 @@ func attack():
 	# Check for enemy hits
 	var bodies = attack_area.get_overlapping_bodies()
 	for body in bodies:
-		if body != self and body.has_method("take_damage"):
+		if body != self and body.has_method("take_damage") and body.collision_layer == 4:
 			print("Player hits enemy for ", ATTACK_DAMAGE, " damage!")
 			body.take_damage(ATTACK_DAMAGE)
 	
@@ -121,10 +121,11 @@ func take_damage(amount: int):
 		die()
 
 func die():
-	player_sprite.play("die")
+	print("Player dies!")
 	health = 0
 	health_bar.value = 0
 	is_attacking = false
 	velocity = Vector2.ZERO
-	await get_tree().create_timer(2.0).timeout
+	player_sprite.play("die")
+	print("Game Over - Press attack to restart")
 	get_node("/root/GameManager").set_game_over()

@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var player: CharacterBody2D = null
 const SPEED = 300
-const ATTACK_RANGE = 50.0
+const ATTACK_RANGE = 30.0
 const ATTACK_DAMAGE = 10
 var last_direction = Vector2.ZERO
 var is_attacking = false
@@ -17,9 +17,9 @@ var can_attack = true
 var has_spawned_minions = false
 
 func _ready():
-	# Set up collision layers (Layer 2 for enemies)
-	collision_layer = 2
-	collision_mask = 1 # Only collide with player (Layer 1)
+	# Set up collision layers
+	collision_layer = 4 # Enemy is on layer 4
+	collision_mask = 1 | 2 # Collide with world (1) and player (2) only, not other enemies
 	
 	# Get reference to the player node
 	player = get_tree().get_first_node_in_group("player")
@@ -109,14 +109,17 @@ func attack():
 	
 	# Set up attack area collision
 	attack_area.collision_layer = 0 # No collision layer needed for area
-	attack_area.collision_mask = 1 # Only detect player (Layer 1)
+	attack_area.collision_mask = 2 # Only detect player (layer 2)
 	
 	shape.radius = ATTACK_RANGE
 	collision_shape.shape = shape
 	attack_area.add_child(collision_shape)
 	add_child(attack_area)
 	
-	# Check for player hit immediately
+	# Wait a tiny bit for physics to update
+	await get_tree().create_timer(0.1).timeout
+	
+	# Check for player hit
 	var bodies = attack_area.get_overlapping_bodies()
 	for body in bodies:
 		if body == player:

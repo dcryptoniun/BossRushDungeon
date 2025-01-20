@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cslb4vxorrxp1" path="res://assets/enemies/Goblin/Take Hit.png" id="6_ivn0s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b2uif"]
-height = 46.0
+height = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_alh1u"]
 atlas = ExtResource("2_jhc13")

@@ -158,6 +158,7 @@ tile_map_data = PackedByteArray("AAD+//7/AAAAAAEAAAD///3/AAAAAAEAAAAAAPz/AAAAAAE
 tile_set = SubResource("TileSet_r0nxi")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 9
 
 [node name="midlight" type="AnimatedSprite2D" parent="StaticBody2D"]
 position = Vector2(581, 308)
