@@ -35,6 +35,12 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_0itgy")
+theme_override_font_sizes/font_size = 40
+text = "Game Over"
+
 [node name="Restart" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_0itgy")
@@ -46,6 +52,7 @@ theme = ExtResource("1_0itgy")
 text = "Main Menu"
 
 [node name="quit" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_0itgy")
 text = "Quit

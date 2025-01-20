@@ -7,8 +7,9 @@ extends CharacterBody2D
 @onready var health_bar = $ProgressBar
 
 var player: CharacterBody2D = null
-const SPEED = 300
-const ATTACK_RANGE = 30.0
+const SPEED = 200
+const ATTACK_RANGE = 50.0
+const MIN_DISTANCE = 30.0 # Minimum distance to keep from player
 const ATTACK_DAMAGE = 10
 var last_direction = Vector2.ZERO
 var is_attacking = false
@@ -34,6 +35,7 @@ func _ready():
 	# Setup navigation
 	nav_agent.path_desired_distance = 4.0
 	nav_agent.target_desired_distance = 4.0
+	nav_agent.avoidance_enabled = true # Enable avoidance
 	
 	# Connect animation finished signal
 	goblin.animation_finished.connect(_on_animation_finished)
@@ -60,6 +62,10 @@ func _physics_process(delta):
 	if !is_attacking:
 		var next_path_position = nav_agent.get_next_path_position()
 		var direction = global_position.direction_to(next_path_position)
+		
+		# If too close to player, move away slightly
+		if distance_to_player < MIN_DISTANCE:
+			direction = -global_position.direction_to(player.global_position)
 		
 		# Update velocity and move
 		velocity = direction * SPEED

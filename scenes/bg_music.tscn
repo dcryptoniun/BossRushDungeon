@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://byh55cpc3an4v"]
+[gd_scene load_steps=3 format=3 uid="uid://btx5jilyqldxv"]
 
 [ext_resource type="Script" path="res://scripts/bg_music.gd" id="1_eu831"]
-[ext_resource type="AudioStream" uid="uid://cjqmypg8vqifc" path="res://assets/sound/JDSherbert - Ambiences Music Pack - Frost Mountain Aura.mp3" id="1_jqqbv"]
+[ext_resource type="AudioStream" uid="uid://bgkg2dmrkny5t" path="res://assets/sound/JDSherbert - Ambiences Music Pack - Swamp of Digeridoos.mp3" id="1_kssnp"]
 
 [node name="BgMusic" type="AudioStreamPlayer"]
-stream = ExtResource("1_jqqbv")
+stream = ExtResource("1_kssnp")
 script = ExtResource("1_eu831")

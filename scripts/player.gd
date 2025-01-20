@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
 @onready var player_sprite = $AnimatedSprite2D # Reference to the AnimatedSprite2D node
-@onready var health_bar = $ProgressBar # Reference to the ProgressBar node
+@onready var health_bar = $ProgressBar
+@onready var sfx_attack = $attack
+@onready var sfx_death = $death
+
 var last_direction = Vector2.ZERO # Tracks the last direction the player moved
 var is_attacking = false # Flag to indicate if the player is attacking
 const SPEED = 600
@@ -23,8 +26,8 @@ func _ready():
 	health_bar.show()
 
 func _physics_process(delta):
-	# Only process movement if not attacking
-	if !is_attacking and health > 0:
+	# Always process movement, even when attacking
+	if health > 0:
 		handle_movement()
 	
 	# Handle attack input only if not already attacking
@@ -39,17 +42,18 @@ func handle_movement():
 	# Update last_direction if moving
 	if direction.length() > 0:
 		last_direction = direction
-		# Play run animations
-		if direction.x < 0: # Moving left
-			player_sprite.play("runleft")
-		elif direction.x > 0: # Moving right
-			player_sprite.play("runright")
-		elif direction.y < 0: # Moving up
-			player_sprite.play("runup")
-		elif direction.y > 0: # Moving down
-			player_sprite.play("rundown")
-	else:
-		# Set idle animation based on last direction
+		# Play run animations only if not attacking
+		if !is_attacking:
+			if direction.x < 0: # Moving left
+				player_sprite.play("runleft")
+			elif direction.x > 0: # Moving right
+				player_sprite.play("runright")
+			elif direction.y < 0: # Moving up
+				player_sprite.play("runup")
+			elif direction.y > 0: # Moving down
+				player_sprite.play("rundown")
+	elif !is_attacking:
+		# Set idle animation based on last direction when not attacking
 		if last_direction.x < 0:
 			player_sprite.play("idleleft")
 		elif last_direction.x > 0:
@@ -63,12 +67,12 @@ func handle_movement():
 
 func attack():
 	is_attacking = true
-	velocity = Vector2.ZERO # Stop movement during attack
 	
 	# Create attack hitbox
 	var attack_area = Area2D.new()
 	var collision_shape = CollisionShape2D.new()
 	var shape = CircleShape2D.new()
+	sfx_attack.play()
 	
 	# Set up attack area collision
 	attack_area.collision_layer = 0 # No collision layer needed for area
@@ -95,17 +99,17 @@ func attack():
 	else:
 		player_sprite.play("attackdown")
 	
-	# Wait a tiny bit for physics to update
+	# Do damage check only once
 	await get_tree().create_timer(0.1).timeout
-	
-	# Check for enemy hits
+	var hit_enemies = [] # Keep track of enemies we've hit
 	var bodies = attack_area.get_overlapping_bodies()
 	for body in bodies:
-		if body != self and body.has_method("take_damage") and body.collision_layer == 4:
+		if body != self and body.has_method("take_damage") and body.collision_layer == 4 and not (body in hit_enemies):
 			print("Player hits enemy for ", ATTACK_DAMAGE, " damage!")
 			body.take_damage(ATTACK_DAMAGE)
+			hit_enemies.append(body) # Add enemy to hit list
 	
-	# Remove attack hitbox after a short delay
+	# Remove attack hitbox
 	await get_tree().create_timer(0.2).timeout
 	attack_area.queue_free()
 
@@ -118,6 +122,7 @@ func take_damage(amount: int):
 	health -= amount
 	health_bar.value = health
 	if health <= 0:
+		sfx_death.play()
 		die()
 
 func die():
@@ -126,6 +131,6 @@ func die():
 	health_bar.value = 0
 	is_attacking = false
 	velocity = Vector2.ZERO
-	player_sprite.play("die")
+	player_sprite.play("idle")
 	print("Game Over - Press attack to restart")
 	get_node("/root/GameManager").set_game_over()

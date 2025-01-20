@@ -1,11 +1,11 @@
 [gd_scene load_steps=39 format=3 uid="uid://drtcjylpfowkc"]
 
-[ext_resource type="Texture2D" uid="uid://b7fjp8asumikk" path="res://assets/enemies/Goblin/Idle.png" id="1_1sh6v"]
+[ext_resource type="Texture2D" uid="uid://b7fjp8asumikk" path="res://assets/images/enemies/Goblin/Idle.png" id="1_1sh6v"]
 [ext_resource type="Script" path="res://scripts/goblin_boss.gd" id="1_010vp"]
-[ext_resource type="Texture2D" uid="uid://4o3cecxk4hos" path="res://assets/enemies/Goblin/Attack.png" id="2_3ucuw"]
-[ext_resource type="Texture2D" uid="uid://b6h5srm6qpe8b" path="res://assets/enemies/Goblin/Run.png" id="2_4wr6i"]
-[ext_resource type="Texture2D" uid="uid://os563vehq83j" path="res://assets/enemies/Goblin/Death.png" id="3_3m1cw"]
-[ext_resource type="Texture2D" uid="uid://cslb4vxorrxp1" path="res://assets/enemies/Goblin/Take Hit.png" id="5_gta1o"]
+[ext_resource type="Texture2D" uid="uid://4o3cecxk4hos" path="res://assets/images/enemies/Goblin/Attack.png" id="2_3ucuw"]
+[ext_resource type="Texture2D" uid="uid://b6h5srm6qpe8b" path="res://assets/images/enemies/Goblin/Run.png" id="2_4wr6i"]
+[ext_resource type="Texture2D" uid="uid://os563vehq83j" path="res://assets/images/enemies/Goblin/Death.png" id="3_3m1cw"]
+[ext_resource type="Texture2D" uid="uid://cslb4vxorrxp1" path="res://assets/images/enemies/Goblin/Take Hit.png" id="5_gta1o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b2uif"]
 

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dporv8u1umf2q"]
+[gd_scene load_steps=9 format=3 uid="uid://dporv8u1umf2q"]
 
-[ext_resource type="Script" path="res://scenes/start.gd" id="1_fu752"]
+[ext_resource type="Script" path="res://scripts/start.gd" id="1_fu752"]
 [ext_resource type="Theme" uid="uid://dmbgblijwfl5s" path="res://themenew.tres" id="1_rpj4p"]
 [ext_resource type="PackedScene" uid="uid://1787bt770f5i" path="res://scenes/world.tscn" id="2_pcnuc"]
 
@@ -10,6 +10,8 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b6m1s"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ta7lo"]
+
 [sub_resource type="Theme" id="Theme_py3vq"]
 Button/colors/font_color = Color(0.88, 0, 0, 1)
 Button/colors/font_focus_color = Color(0.88, 0, 0, 1)
@@ -17,6 +19,7 @@ Button/font_sizes/font_size = 38
 Button/styles/disabled = SubResource("StyleBoxEmpty_lo5vu")
 Button/styles/focus = SubResource("StyleBoxEmpty_l7125")
 Button/styles/hover = SubResource("StyleBoxEmpty_b6m1s")
+Button/styles/pressed = SubResource("StyleBoxFlat_ta7lo")
 
 [node name="Start" type="Node2D"]
 script = ExtResource("1_fu752")
@@ -47,17 +50,32 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+theme_override_font_sizes/font_size = 40
+text = "Main Menu"
+
+[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+theme_override_font_sizes/font_size = 40
+text = "Boss Rush Dungeon"
+
 [node name="Start" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
 text = "Start"
 
 [node name="Credit" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
 text = "Credit"
 
 [node name="quit" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
 text = "Quit
@@ -69,85 +87,102 @@ visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/creditcontainer"]
 custom_minimum_size = Vector2(200, 300)
-offset_left = 227.0
-offset_top = 111.0
-offset_right = 781.0
-offset_bottom = 503.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 904.0
+offset_bottom = 578.0
 scale = Vector2(1.28, 1.12)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.0158397, 0.0900776, 0.0581399, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/creditcontainer"]
-offset_left = 347.0
-offset_top = 144.0
-offset_right = 818.0
-offset_bottom = 475.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 13
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 23
 
 [node name="Close" type="Button" parent="CanvasLayer/creditcontainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 0
 theme = SubResource("Theme_py3vq")
-text = "x"
+theme_override_constants/h_separation = 20
+text = "X"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+[node name="tileset" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer"]
+[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/tileset"]
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
-text = "Sound"
+text = "Tileset"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer"]
+[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/tileset"]
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
-theme_override_font_sizes/font_size = 28
-text = "xxxxx: xxxxxxx"
+theme_override_font_sizes/font_size = 23
+text = "\"pvgames.itch.io/infernus-tileset\""
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+[node name="charatersprite" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer2"]
+[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/charatersprite"]
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
-text = "Sound"
+text = "Player Sprite"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer2"]
+[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/charatersprite"]
+custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
-theme_override_font_sizes/font_size = 28
-text = "xxxxx: xxxxxxx"
+theme_override_font_sizes/font_size = 23
+text = "\"smallscaleint.itch.io/hd-8-directional-top-down-character-pack-1\""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="enemysprite" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/enemysprite"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Enemy Sprite"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer3"]
+[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/enemysprite"]
+custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
-text = "Sound"
+theme_override_font_sizes/font_size = 23
+text = "\"luizmelo.itch.io/monsters-creatures-fantasy\""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BGMusic" type="VBoxContainer" parent="CanvasLayer/creditcontainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/BGMusic"]
+layout_mode = 2
+theme = ExtResource("1_rpj4p")
+text = "Background Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/VBoxContainer3"]
+[node name="credit" type="Label" parent="CanvasLayer/creditcontainer/VBoxContainer/BGMusic"]
 layout_mode = 2
 theme = ExtResource("1_rpj4p")
-theme_override_font_sizes/font_size = 28
-text = "xxxxx: xxxxxxx"
+theme_override_font_sizes/font_size = 23
+text = "\"jdsherbert.itch.io/ambiences-music-pack\""
 horizontal_alignment = 1
 vertical_alignment = 1
 

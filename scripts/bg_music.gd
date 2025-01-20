@@ -6,7 +6,7 @@ func _ready():
 	autoplay = true
 	
 	# Make sure volume is at a good level
-	volume_db = -40 # Adjust this value as needed
+	volume_db = -50 # Adjust this value as needed
 	
 	# Start playing if not already playing
 	if !playing:
@@ -36,3 +36,4 @@ func transition_to_scene(scene_path: String):
 	await fade_out()
 	get_tree().change_scene_to_file(scene_path)
 	fade_in()
+	
