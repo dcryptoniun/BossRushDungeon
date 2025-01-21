@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvf1tlovoewde"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_6npnb"]
 [ext_resource type="PackedScene" uid="uid://1787bt770f5i" path="res://scenes/world.tscn" id="1_52srn"]
 [ext_resource type="PackedScene" uid="uid://bx7vw0wkaia5d" path="res://scenes/player.tscn" id="1_d1gj1"]
-[ext_resource type="PackedScene" uid="uid://drtcjylpfowkc" path="res://scenes/goblin_boss.tscn" id="3_xx0hg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v5v0y"]
 vertices = PackedVector2Array(630.602, 283.758, 755, 118, 1282.43, 3.25781, 1309.56, 635, 615.141, 354.594, -134.047, 635, 541.258, 358.406, 522.648, 282.727, -136.953, 18.1328, 436.063, 205.813, 501.297, 153.617, 488.93, 27.1406, 654.633, 13.6328, 684.461, 118, 560.133, 256.531, 755, 17.7266, 474.492, 193.258, 374.156, 24.8828, 388.391, 137.711)
@@ -12,6 +12,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-147, 8, -144, 645, 132
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(0, -1)
+script = ExtResource("1_6npnb")
 
 [node name="World" parent="." instance=ExtResource("1_52srn")]
 
@@ -21,8 +22,8 @@ position = Vector2(576, 36)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(5, 0)
 
-[node name="GoblinBoss" parent="." instance=ExtResource("3_xx0hg")]
-position = Vector2(103, 236)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_v5v0y")
+
+[node name="EnemySpawnPoint" type="Node2D" parent="."]
+position = Vector2(-113, 340)

@@ -1,17 +1,18 @@
+# mushroom_boss.gd
 extends CharacterBody2D
 
-@onready var eye = $AnimatedSprite2D
+@onready var mushroom = $AnimatedSprite2D
 @onready var nav_agent = $NavigationAgent2D
 @onready var health_bar = $ProgressBar
 
 var player: CharacterBody2D = null
-const SPEED = 250 # Faster than others
-const ATTACK_RANGE = 70.0 # Longer range
-const MIN_DISTANCE = 60.0 # Keeps more distance
-const ATTACK_DAMAGE = 12
+const SPEED = 200
+const ATTACK_RANGE = 50.0
+const MIN_DISTANCE = 30.0
+const ATTACK_DAMAGE = 15 # Different damage than goblin
 var last_direction = Vector2.ZERO
 var is_attacking = false
-var health = 200
+var health = 250 # Different health than goblin
 var can_attack = true
 
 func _ready():
@@ -30,13 +31,13 @@ func _ready():
 	nav_agent.target_desired_distance = 4.0
 	nav_agent.avoidance_enabled = true
 	
+	# Connect animation finished signal
+	mushroom.animation_finished.connect(_on_animation_finished)
+	
 	# Setup health bar
 	health_bar.max_value = health
 	health_bar.value = health
 	health_bar.show()
-	
-	# Connect animation finished signal
-	eye.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta):
 	if !player or health <= 0:
@@ -75,20 +76,31 @@ func update_animation(direction: Vector2):
 	if is_attacking:
 		return
 		
-	# Always play idle (flying) animation when not attacking
-	if eye.animation != "idle":
-		eye.play("idle")
-	
-	# Handle horizontal flipping based on movement direction
-	if direction.x < 0:
-		eye.flip_h = true
-	elif direction.x > 0:
-		eye.flip_h = false
+	if direction.length() > 0:
+		# Play run animation
+		if mushroom.animation != "run":
+			mushroom.play("run")
+		
+		# Handle horizontal flipping
+		if direction.x < 0:
+			mushroom.flip_h = true
+		elif direction.x > 0:
+			mushroom.flip_h = false
+	else:
+		# Play idle animation
+		if mushroom.animation != "idle":
+			mushroom.play("idle")
+		
+		# Keep the last horizontal flip state
+		if last_direction.x < 0:
+			mushroom.flip_h = true
+		elif last_direction.x > 0:
+			mushroom.flip_h = false
 
 func attack():
 	is_attacking = true
 	can_attack = false
-	eye.play("attack")
+	mushroom.play("attack")
 	
 	# Create attack hitbox
 	var attack_area = Area2D.new()
@@ -122,13 +134,12 @@ func attack():
 	can_attack = true
 
 func _on_animation_finished():
-	if eye.animation == "attack":
+	if mushroom.animation == "attack":
 		is_attacking = false
-		# Return to idle (flying) animation
-		eye.play("idle")
-	elif eye.animation == "takehit":
+	elif mushroom.animation == "takehit":
 		if !is_attacking:
-			eye.play("idle")
+			var direction = velocity.normalized()
+			update_animation(direction)
 
 func deal_damage_to_player():
 	if player and player.has_method("take_damage"):
@@ -140,20 +151,19 @@ func take_damage(amount: int):
 	
 	# Only play hit animation if not attacking
 	if !is_attacking:
-		eye.play("takehit")
+		mushroom.play("takehit")
 	
 	if health <= 0:
 		die()
 
 func die():
-	# Stop all movement and actions
 	velocity = Vector2.ZERO
 	is_attacking = false
 	can_attack = false
 	health_bar.value = 0
 	
 	# Play death animation
-	eye.play("death")
+	mushroom.play("death")
 	
 	# Wait for death animation
 	await get_tree().create_timer(2.0).timeout

@@ -105,7 +105,6 @@ func attack():
 	var bodies = attack_area.get_overlapping_bodies()
 	for body in bodies:
 		if body != self and body.has_method("take_damage") and body.collision_layer == 4 and not (body in hit_enemies):
-			print("Player hits enemy for ", ATTACK_DAMAGE, " damage!")
 			body.take_damage(ATTACK_DAMAGE)
 			hit_enemies.append(body) # Add enemy to hit list
 	
@@ -118,7 +117,7 @@ func _on_animation_finished():
 		is_attacking = false
 
 func take_damage(amount: int):
-	print("Player takes ", amount, " damage! Health: ", health, " -> ", health - amount)
+	
 	health -= amount
 	health_bar.value = health
 	if health <= 0:
@@ -126,11 +125,11 @@ func take_damage(amount: int):
 		die()
 
 func die():
-	print("Player dies!")
+	
 	health = 0
 	health_bar.value = 0
 	is_attacking = false
 	velocity = Vector2.ZERO
 	player_sprite.play("idle")
-	print("Game Over - Press attack to restart")
-	get_node("/root/GameManager").set_game_over()
+	
+	GameManager.set_game_over(false) # Player lost

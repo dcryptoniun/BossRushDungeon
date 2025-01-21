@@ -176,14 +176,13 @@ func die():
 	
 	# Play death animation
 	goblin.play("death")
-	print("Goblin Boss defeated - Press attack to restart")
 	
 	# Wait a moment before freeing
 	await get_tree().create_timer(2.0).timeout
 	queue_free()
 	
 	# Set game over state
-	game_manager.set_game_over()
+	GameManager.set_game_over(true)
 
 func spawn_minions():
 	# Spawn 5 minions in a circle around the boss
@@ -198,5 +197,3 @@ func spawn_minions():
 		var minion = minion_scene.instantiate()
 		minion.global_position = spawn_pos
 		get_parent().add_child(minion)
-	
-	print("Goblin Boss spawned minions!")

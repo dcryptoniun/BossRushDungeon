@@ -1,10 +1,13 @@
-[gd_scene load_steps=32 format=3 uid="uid://3ua47rkhqmgc"]
+[gd_scene load_steps=34 format=3 uid="uid://3ua47rkhqmgc"]
 
 [ext_resource type="Texture2D" uid="uid://c1meo7jwqna18" path="res://assets/images/enemies/Flying eye/Attack.png" id="1_bw8nx"]
 [ext_resource type="Script" path="res://scripts/flying_eye.gd" id="1_y4mq1"]
 [ext_resource type="Texture2D" uid="uid://bnaugdi1iu804" path="res://assets/images/enemies/Flying eye/Death.png" id="2_swa5x"]
 [ext_resource type="Texture2D" uid="uid://byo1n2salbbed" path="res://assets/images/enemies/Flying eye/Take Hit.png" id="3_q5pke"]
 [ext_resource type="Texture2D" uid="uid://2v5qkffb5lye" path="res://assets/images/enemies/Flying eye/Flight.png" id="4_orkg8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_da4gm"]
+radius = 4.12311
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwphd"]
 atlas = ExtResource("1_bw8nx")
@@ -54,22 +57,6 @@ region = Rect2(300, 0, 150, 150)
 atlas = ExtResource("2_swa5x")
 region = Rect2(450, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bxpl8"]
-atlas = ExtResource("3_q5pke")
-region = Rect2(0, 0, 150, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8hjkn"]
-atlas = ExtResource("3_q5pke")
-region = Rect2(150, 0, 150, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hd3g4"]
-atlas = ExtResource("3_q5pke")
-region = Rect2(300, 0, 150, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sn740"]
-atlas = ExtResource("3_q5pke")
-region = Rect2(450, 0, 150, 150)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4whre"]
 atlas = ExtResource("4_orkg8")
 region = Rect2(0, 0, 150, 150)
@@ -101,6 +88,22 @@ region = Rect2(900, 0, 150, 150)
 [sub_resource type="AtlasTexture" id="AtlasTexture_t2iu1"]
 atlas = ExtResource("4_orkg8")
 region = Rect2(1050, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxpl8"]
+atlas = ExtResource("3_q5pke")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hjkn"]
+atlas = ExtResource("3_q5pke")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd3g4"]
+atlas = ExtResource("3_q5pke")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn740"]
+atlas = ExtResource("3_q5pke")
+region = Rect2(450, 0, 150, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pj8ev"]
 animations = [{
@@ -152,23 +155,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bxpl8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8hjkn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hd3g4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sn740")
-}],
-"loop": false,
-"name": &"hit",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_4whre")
 }, {
 "duration": 1.0,
@@ -195,19 +181,53 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxpl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hjkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd3g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sn740")
+}],
+"loop": false,
+"name": &"takehit",
+"speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_da4gm"]
-radius = 4.12311
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymby5"]
+bg_color = Color(0.956863, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7fnh"]
+bg_color = Color(0, 0.721569, 0.12549, 1)
 
 [node name="FlyingEye" type="CharacterBody2D"]
 script = ExtResource("1_y4mq1")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_da4gm")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-4, -9)
 sprite_frames = SubResource("SpriteFrames_pj8ev")
-animation = &"hit"
+animation = &"takehit"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_da4gm")
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -44.0
+offset_top = 8.0
+offset_right = 45.0
+offset_bottom = 13.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ymby5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m7fnh")
+step = 10.0
+show_percentage = false
