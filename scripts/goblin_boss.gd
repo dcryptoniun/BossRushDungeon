@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var game_manager: Node = get_node("/root/GameManager")
+@onready var game_manager: Node = GameManager
 @onready var goblin = $AnimatedSprite2D
 @onready var nav_agent = $NavigationAgent2D
 @onready var path_timer = $Timer
@@ -183,7 +183,7 @@ func die():
 	queue_free()
 	
 	# Set game over state
-	get_node("/root/GameManager").set_game_over()
+	game_manager.set_game_over()
 
 func spawn_minions():
 	# Spawn 5 minions in a circle around the boss

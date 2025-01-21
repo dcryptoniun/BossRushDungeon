@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dporv8u1umf2q"]
+[gd_scene load_steps=11 format=3 uid="uid://dporv8u1umf2q"]
 
 [ext_resource type="Script" path="res://scripts/start.gd" id="1_fu752"]
 [ext_resource type="Theme" uid="uid://dmbgblijwfl5s" path="res://themenew.tres" id="1_rpj4p"]
 [ext_resource type="PackedScene" uid="uid://1787bt770f5i" path="res://scenes/world.tscn" id="2_pcnuc"]
+[ext_resource type="PackedScene" uid="uid://dtfnhsljcwuqo" path="res://scenes/spin_wheel.tscn" id="3_lp8qd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4ygv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lo5vu"]
 
@@ -37,10 +41,26 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 color = Color(0.0413812, 0.161144, 0.129822, 0.576471)
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 394.0
+offset_top = 61.0
+offset_right = 776.0
+offset_bottom = 116.0
+theme = ExtResource("1_rpj4p")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_q4ygv")
+text = "Boss Rush Dungeon"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -7.0
+offset_right = 75.0
+offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -48,7 +68,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-theme_override_constants/separation = 20
+theme_override_constants/separation = -24
 
 [node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
 visible = false
@@ -56,12 +76,6 @@ layout_mode = 2
 theme = ExtResource("1_rpj4p")
 theme_override_font_sizes/font_size = 40
 text = "Main Menu"
-
-[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_rpj4p")
-theme_override_font_sizes/font_size = 40
-text = "Boss Rush Dungeon"
 
 [node name="Start" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -185,6 +199,9 @@ theme_override_font_sizes/font_size = 23
 text = "\"jdsherbert.itch.io/ambiences-music-pack\""
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SpinWheel" parent="CanvasLayer" instance=ExtResource("3_lp8qd")]
+position = Vector2(577, 242)
 
 [node name="World" parent="." instance=ExtResource("2_pcnuc")]
 

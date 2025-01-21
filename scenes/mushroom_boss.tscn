@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://co0u8hprps3df"]
+
+[ext_resource type="Texture2D" uid="uid://bguwfaumwpj6d" path="res://assets/images/enemies/Mushroom/Idle.png" id="1_cm6i2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m2sr8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rufu"]
+atlas = ExtResource("1_cm6i2")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4oxg0"]
+atlas = ExtResource("1_cm6i2")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pob7t"]
+atlas = ExtResource("1_cm6i2")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muqvj"]
+atlas = ExtResource("1_cm6i2")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r8auh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rufu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4oxg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pob7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muqvj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Mushroom_boss" type="CharacterBody2D"]
+position = Vector2(0, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
+shape = SubResource("CircleShape2D_m2sr8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -15)
+scale = Vector2(1.87333, 1.84)
+sprite_frames = SubResource("SpriteFrames_r8auh")
+animation = &"idle"

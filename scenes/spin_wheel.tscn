@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtfnhsljcwuqo"]
+
+[ext_resource type="Texture2D" uid="uid://dp753v53r25tn" path="res://assets/images/enemies/spin.png" id="1_1as43"]
+[ext_resource type="Script" path="res://scripts/spin_wheel.gd" id="1_m6k2f"]
+[ext_resource type="Texture2D" uid="uid://b8vrex52xkvv" path="res://assets/images/enemies/pointer.png" id="2_k3mhf"]
+
+[node name="SpinWheel" type="Node2D"]
+scale = Vector2(0.440001, 0.48)
+script = ExtResource("1_m6k2f")
+
+[node name="wheel" type="Sprite2D" parent="."]
+texture = ExtResource("1_1as43")
+
+[node name="pointer" type="Sprite2D" parent="."]
+position = Vector2(0, -188)
+texture = ExtResource("2_k3mhf")
