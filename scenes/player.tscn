@@ -1481,7 +1481,7 @@ show_percentage = false
 
 [node name="attack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_r6iko")
-volume_db = -0.415
+volume_db = -15.406
 
 [node name="death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_1dnhc")

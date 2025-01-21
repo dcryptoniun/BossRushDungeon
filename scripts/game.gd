@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var pause_menu = $PauseMenu # Add a PauseMenu node in your game scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,3 +14,19 @@ func _ready() -> void:
 	
 	# Add enemy to scene
 	add_child(enemy_instance)
+	
+	# Set up pause menu
+	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	pause_menu.hide()
+
+func _input(event):
+	if event.is_action_pressed("pause"):
+		_toggle_pause()
+
+func _toggle_pause():
+	get_tree().paused = !get_tree().paused
+	pause_menu.visible = get_tree().paused
+	BgMusic.sfx_ui()
+
+func _on_resume_pressed() -> void:
+	_toggle_pause()

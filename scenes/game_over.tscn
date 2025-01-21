@@ -71,5 +71,6 @@ text = "Quit
 [node name="World" parent="." instance=ExtResource("2_i1e1h")]
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/HBoxContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]

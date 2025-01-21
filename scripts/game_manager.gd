@@ -1,7 +1,7 @@
 extends Node
 
 var game_over = false
-var selected_enemy = "flying_eye" # default enemy
+var selected_enemy = "goblin_boss" # default enemy
 var player_won = false # New variable to track who won
 
 func _process(delta):
@@ -14,4 +14,5 @@ func set_game_over(did_player_win: bool = false):
 
 func restart_game():
 	game_over = false
+	BgMusic.sfx_gameover()
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")

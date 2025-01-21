@@ -43,6 +43,7 @@ func start_spin():
 	if !is_spinning:
 		is_spinning = true
 		wheel_speed = MAX_SPEED
+		BgMusic.sfx_wheel()
 		
 		# Select a random enemy that's different from the last one
 		var available_sections = sections.filter(func(section): return section.enemy != last_selected)
@@ -70,6 +71,8 @@ func select_enemy():
 	# Find the closest marker to the pointer
 	var closest_marker = null
 	var closest_distance = INF
+	BgMusic.sfx_ui2()
+	BgMusic.sfx_wheelstop()
 	
 	for section in sections:
 		var marker = get_node(section.marker)

@@ -10,12 +10,15 @@ func _ready():
 		status_label.text = "Defeat!\nYou were slain by the " + GameManager.selected_enemy.replace("_", " ").capitalize()
 
 func _on_main_menu_pressed() -> void:
+	BgMusic.sfx_ui()
 	get_tree().change_scene_to_file("res://scenes/start.tscn")
 
 
 func _on_restart_pressed() -> void:
+	BgMusic.sfx_ui()
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 
 func _on_quit_pressed() -> void:
+	BgMusic.sfx_ui()
 	get_tree().quit()

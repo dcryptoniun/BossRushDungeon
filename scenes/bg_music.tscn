@@ -1,8 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://btx5jilyqldxv"]
+[gd_scene load_steps=7 format=3 uid="uid://btx5jilyqldxv"]
 
 [ext_resource type="Script" path="res://scripts/bg_music.gd" id="1_eu831"]
 [ext_resource type="AudioStream" uid="uid://bgkg2dmrkny5t" path="res://assets/sound/JDSherbert - Ambiences Music Pack - Swamp of Digeridoos.mp3" id="1_kssnp"]
+[ext_resource type="AudioStream" uid="uid://bvbthtd1tdgml" path="res://assets/sound/sfx/8-bit-game-sfx-sound-21-269970.mp3" id="3_4aa36"]
+[ext_resource type="AudioStream" uid="uid://mwi42xvist5s" path="res://assets/sound/sfx/coin-recieved-230517.mp3" id="4_osv6g"]
+[ext_resource type="AudioStream" uid="uid://cu23bwboklgwr" path="res://assets/sound/sfx/wheel-spin-click-slow-down.mp3" id="5_65kmy"]
+[ext_resource type="AudioStream" uid="uid://pfgttvry7tnm" path="res://assets/sound/sfx/game-over-39-199830.mp3" id="6_w6xnb"]
 
 [node name="BgMusic" type="AudioStreamPlayer"]
 stream = ExtResource("1_kssnp")
+volume_db = -52.468
 script = ExtResource("1_eu831")
+
+[node name="Sfx_ui" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4aa36")
+volume_db = -31.856
+
+[node name="Sfx_ui2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_osv6g")
+volume_db = -29.982
+
+[node name="wheelspin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_65kmy")
+volume_db = -31.856
+pitch_scale = 1.29
+parameters/looping = true
+
+[node name="gameover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_w6xnb")
+volume_db = -26.234

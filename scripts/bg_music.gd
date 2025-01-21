@@ -37,3 +37,17 @@ func transition_to_scene(scene_path: String):
 	get_tree().change_scene_to_file(scene_path)
 	fade_in()
 	
+func sfx_ui():
+	$Sfx_ui.play()
+
+func sfx_ui2():
+	$Sfx_ui2.play()
+
+func sfx_wheel():
+	$wheelspin.play()
+
+func sfx_wheelstop():
+	$wheelspin.stop()
+
+func sfx_gameover():
+	$gameover.play()
